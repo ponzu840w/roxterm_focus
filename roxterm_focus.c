@@ -12,6 +12,19 @@
 #include <X11/Xutil.h>
 
 /**
+ * Ignores some errors, improving the survivability of demon.
+ */
+int
+error_handler(Display *dpy, XErrorEvent *ev)
+{
+  if (ev->error_code == BadWindow)
+  {
+    return 0; // ignore
+  }
+  return XSetErrorHandler(NULL)(dpy, ev); // fallback
+}
+
+/**
  * Send an EWMH client message to DefaultRootWindow.
  * msg_name is e.g. "_NET_CURRENT_DESKTOP" or "_NET_ACTIVE_WINDOW".
  * Returns 0 on success, -1 on failure.
