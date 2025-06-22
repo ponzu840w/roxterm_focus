@@ -29,7 +29,7 @@ make debug
 or
 
 ```
-make debug
+make
 sudo make install
 mkdir -p "$HOME/.local/var/log"
 cp debug_run.sh ~/.local/bin/
