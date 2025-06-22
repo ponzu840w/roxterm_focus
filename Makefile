@@ -1,16 +1,23 @@
-PREFIX     ?= /usr/local
-BINDIR     := $(PREFIX)/bin
-CC         ?= gcc
-CFLAGS     := -Wall -O2
-LIBS       := -lX11
-TARGET     := roxterm_focus
+PREFIX       ?= /usr/local
+BINDIR       := $(PREFIX)/bin
+CC           ?= gcc
+CFLAGS       := -Wall -O2
+CFLAGS_DEBUG := -Wall -g -DDEBUG
+LIBS         := -lX11
+TARGET       := roxterm_focus
+TARGET_DEBUG := $(TARGET)_debug
 
-.PHONY: all install uninstall clean
+.PHONY: all install uninstall clean debug
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
+
+debug: $(TARGET_DEBUG)
+
+$(TARGET_DEBUG): $(TARGET).c
+	$(CC) $(CFLAGS_DEBUG) -o $@ $< $(LIBS)
 
 install: all
 	install -d $(DESTDIR)$(BINDIR)
