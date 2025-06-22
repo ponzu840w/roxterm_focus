@@ -18,3 +18,22 @@ sudo apt install libc6-dev libx11-dev # install dependencies
 make
 sudo make install
 echo "/usr/local/bin/roxterm_focus &" >> ~/.desktop-session/startup
+```
+
+## Debug
+```
+make debug
+./roxterm_focus_debug
+```
+
+or
+
+```
+make debug
+sudo make install
+mkdir -p "$HOME/.local/var/log"
+cp debug_run.sh ~/.local/bin/
+echo "~/.local/bin/debug_run.sh &" >> ~/.desktop-session/startup
+```
+
+check $HOME/.local/var/log/roxterm-forcus.log
